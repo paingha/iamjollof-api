@@ -9,7 +9,7 @@
 
 ## Introduction
 
-The gRPC API for my personal website iamjollof.com.
+The gRPC API for my personal website [iamjollof.com](https://iamjollof.com).
 
 ## Install and Run
 
