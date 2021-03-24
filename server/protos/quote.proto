@@ -1,0 +1,79 @@
+// Copyright 2021 Paingha Joe Alagoa. All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
+syntax = "proto3";
+
+option go_package = "quote";
+
+import "google/protobuf/timestamp.proto";
+
+service Quote {
+    rpc GetQuote(GetQuoteRequest) returns (GetQuoteResponse){};
+    rpc GetAllQuotes(GetAllQuotesRequest) returns (GetAllQuotesResponse){};
+    rpc CreateQuote(CreateQuoteRequest) returns (CreateQuoteResponse){};
+    rpc DeleteQuote(DeleteQuoteRequest) returns (DeleteQuoteResponse){};
+    rpc UpdateQuote(UpdateQuoteRequest) returns (UpdateQuoteResponse){};
+}
+
+message CreateQuoteRequest{
+    string Author = 1;
+    string Content = 2;
+    string Active = 3;
+}
+
+message CreateQuoteResponse{
+    int32 ID = 1;
+    string Author = 2;
+    string Content = 3;
+    string Active = 4;
+    string Message = 5;
+}
+
+message UpdateQuoteRequest{
+    int32 ID = 1;
+    string Author = 2;
+    string Content = 3;
+    string Active = 4;
+}
+
+message UpdateQuoteResponse{
+    string Author = 1;
+    string Content = 2;
+    string Active = 3;
+    string Message = 4;
+}
+
+message DeleteQuoteRequest {
+    int32 ID = 1;
+}
+
+message DeleteQuoteResponse {
+    string Message = 1;
+}
+
+message GetQuoteRequest {
+    int32 ID = 1;
+}
+
+message GetQuoteResponse {
+    int32 ID = 1;
+    string Author = 2;
+    string Content = 3;
+    string Active = 4;
+    string Message = 5;
+    google.protobuf.Timestamp CreatedAt = 6;
+    google.protobuf.Timestamp UpdatedAt = 7;
+}
+
+message GetAllQuotesRequest {
+    int32 PageNumber = 1;
+    int32 ResultPerPage = 2;
+}
+
+message GetAllQuotesResponse {
+    int32 TotalCount = 1;
+    int32 PageNumber = 2;
+    int32 ResultPerPage = 3;
+    repeated GetQuoteResponse Quotes = 4;
+}

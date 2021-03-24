@@ -1,0 +1,111 @@
+// Copyright 2021 Paingha Joe Alagoa. All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
+syntax = "proto3";
+
+option go_package = "project";
+
+import "google/protobuf/timestamp.proto";
+
+service Project {
+    rpc GetProject(GetProjectRequest) returns (GetProjectResponse){};
+    rpc GetAllProjects(GetAllProjectsRequest) returns (GetAllProjectsResponse){};
+    rpc CreateProject(CreateProjectRequest) returns (CreateProjectResponse){};
+    rpc DeleteProject(DeleteProjectRequest) returns (DeleteProjectResponse){};
+    rpc UpdateProject(UpdateProjectRequest) returns (UpdateProjectResponse){};
+}
+
+message CreateProjectRequest{
+    string Title = 1;
+    string Content = 2;
+    string Active = 3;
+    string Summary = 4;
+    string FeaturedImage = 5;
+    string Company = 6;
+    string Location = 7;
+    string Website = 8;
+    string Repo = 9;
+}
+
+message CreateProjectResponse{
+    int32 ID = 1;
+    string Title = 2;
+    string Content = 3;
+    string Active = 4;
+    string Summary = 5;
+    string FeaturedImage = 6;
+    string Company = 7;
+    string Location = 8;
+    string Website = 9;
+    string Repo = 10;
+    string Message = 11;
+}
+
+message UpdateProjectRequest{
+    int32 ID = 1;
+    string Title = 2;
+    string Content = 3;
+    string Active = 4;
+    string Summary = 5;
+    string FeaturedImage = 6;
+    string Company = 7;
+    string Location = 8;
+    string Website = 9;
+    string Repo = 10;
+    string Slug = 11;
+}
+
+message UpdateProjectResponse{
+    string Title = 1;
+    string Content = 2;
+    string Active = 3;
+    string Summary = 4;
+    string FeaturedImage = 5;
+    string Company = 6;
+    string Location = 7;
+    string Website = 8;
+    string Repo = 9;
+    string Slug = 10;
+    string Message = 11;
+}
+
+message DeleteProjectRequest {
+    int32 ID = 1;
+}
+
+message DeleteProjectResponse {
+    string Message = 1;
+}
+
+message GetProjectRequest {
+    int32 ID = 1;
+}
+
+message GetProjectResponse {
+    string Title = 1;
+    string Content = 2;
+    string Active = 3;
+    string Summary = 4;
+    string FeaturedImage = 5;
+    string Company = 6;
+    string Location = 7;
+    string Website = 8;
+    string Repo = 9;
+    string Slug = 10;
+    string Message = 11;
+    google.protobuf.Timestamp CreatedAt = 12;
+    google.protobuf.Timestamp UpdatedAt = 13;
+}
+
+message GetAllProjectsRequest {
+    int32 PageNumber = 1;
+    int32 ResultPerPage = 2;
+}
+
+message GetAllProjectsResponse {
+    int32 TotalCount = 1;
+    int32 PageNumber = 2;
+    int32 ResultPerPage = 3;
+    repeated GetProjectResponse Projects = 4;
+}

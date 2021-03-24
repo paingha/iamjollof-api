@@ -1,0 +1,101 @@
+// Copyright 2021 Paingha Joe Alagoa. All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
+syntax = "proto3";
+
+option go_package = "opensource";
+
+import "google/protobuf/timestamp.proto";
+
+service Opensource {
+    rpc GetOpensource(GetOpensourceRequest) returns (GetOpensourceResponse){};
+    rpc GetAllOpensources(GetAllOpensourcesRequest) returns (GetAllOpensourcesResponse){};
+    rpc CreateOpensource(CreateOpensourceRequest) returns (CreateOpensourceResponse){};
+    rpc DeleteOpensource(DeleteOpensourceRequest) returns (DeleteOpensourceResponse){};
+    rpc UpdateOpensource(UpdateOpensourceRequest) returns (UpdateOpensourceResponse){};
+}
+
+message CreateOpensourceRequest{
+    string Title = 1;
+    string Content = 2;
+    string Active = 3;
+    string Summary = 4;
+    string FeaturedImage = 5;
+    string Website = 6;
+    string Repo = 7;
+}
+
+message CreateOpensourceResponse{
+    int32 ID = 1;
+    string Title = 2;
+    string Content = 3;
+    string Active = 4;
+    string Summary = 5;
+    string FeaturedImage = 6;
+    string Website = 7;
+    string Repo = 8;
+    string Message = 9;
+}
+
+message UpdateOpensourceRequest{
+    int32 ID = 1;
+    string Title = 2;
+    string Content = 3;
+    string Active = 4;
+    string Summary = 5;
+    string FeaturedImage = 6;
+    string Website = 7;
+    string Repo = 8;
+    string Slug = 9;
+}
+
+message UpdateOpensourceResponse{
+    string Title = 1;
+    string Content = 2;
+    string Active = 3;
+    string Summary = 4;
+    string FeaturedImage = 5;
+    string Website = 6;
+    string Repo = 7;
+    string Slug = 8;
+    string Message = 9;
+}
+
+message DeleteOpensourceRequest {
+    int32 ID = 1;
+}
+
+message DeleteOpensourceResponse {
+    string Message = 1;
+}
+
+message GetOpensourceRequest {
+    int32 ID = 1;
+}
+
+message GetOpensourceResponse {
+    string Title = 1;
+    string Content = 2;
+    string Active = 3;
+    string Summary = 4;
+    string FeaturedImage = 5;
+    string Website = 6;
+    string Repo = 7;
+    string Slug = 8;
+    string Message = 9;
+    google.protobuf.Timestamp CreatedAt = 10;
+    google.protobuf.Timestamp UpdatedAt = 11;
+}
+
+message GetAllOpensourcesRequest {
+    int32 PageNumber = 1;
+    int32 ResultPerPage = 2;
+}
+
+message GetAllOpensourcesResponse {
+    int32 TotalCount = 1;
+    int32 PageNumber = 2;
+    int32 ResultPerPage = 3;
+    repeated GetOpensourceResponse Opensources = 4;
+}

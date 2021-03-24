@@ -1,0 +1,93 @@
+// Copyright 2021 Paingha Joe Alagoa. All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
+syntax = "proto3";
+
+option go_package = "blog";
+
+import "google/protobuf/timestamp.proto";
+
+service Blog {
+    rpc GetBlog(GetBlogRequest) returns (GetBlogResponse){};
+    rpc GetAllBlogs(GetAllBlogsRequest) returns (GetAllBlogsResponse){};
+    rpc CreateBlog(CreateBlogRequest) returns (CreateBlogResponse){};
+    rpc DeleteBlog(DeleteBlogRequest) returns (DeleteBlogResponse){};
+    rpc UpdateBlog(UpdateBlogRequest) returns (UpdateBlogResponse){};
+}
+
+message CreateBlogRequest{
+    string Title = 1;
+    string Content = 2;
+    string Active = 3;
+    string Summary = 4;
+    string FeaturedImage = 5;
+}
+
+message CreateBlogResponse{
+    int32 ID = 1;
+    string Title = 2;
+    string Content = 3;
+    string Active = 4;
+    string Summary = 5;
+    string Slug = 6;
+    string FeaturedImage = 7;
+    string Message = 8;
+}
+
+message UpdateBlogRequest{
+    int32 ID = 1;
+    string Title = 2;
+    string Content = 3;
+    string Active = 4;
+    string Summary = 5;
+    string Slug = 6;
+    string FeaturedImage = 7;
+}
+
+message UpdateBlogResponse{
+    string Title = 1;
+    string Content = 2;
+    string Active = 3;
+    string Summary = 4;
+    string Slug = 5;
+    string FeaturedImage = 6;
+    string Message = 7;
+}
+
+message DeleteBlogRequest {
+    int32 ID = 1;
+}
+
+message DeleteBlogResponse {
+    string Message = 1;
+}
+
+message GetBlogRequest {
+    int32 ID = 1;
+}
+
+message GetBlogResponse {
+    int32 ID = 1;
+    string Title = 2;
+    string Content = 3;
+    string Active = 4;
+    string Summary = 5;
+    string Slug = 6;
+    string FeaturedImage = 7;
+    string Message = 8;
+    google.protobuf.Timestamp CreatedAt = 9;
+    google.protobuf.Timestamp UpdatedAt = 10;
+}
+
+message GetAllBlogsRequest {
+    int32 PageNumber = 1;
+    int32 ResultPerPage = 2;
+}
+
+message GetAllBlogsResponse {
+    int32 TotalCount = 1;
+    int32 PageNumber = 2;
+    int32 ResultPerPage = 3;
+    repeated GetBlogResponse Blogs = 4;
+}

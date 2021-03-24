@@ -1,0 +1,27 @@
+// Copyright 2021 Paingha Joe Alagoa. All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
+syntax = "proto3";
+
+option go_package = "push";
+
+service Push {
+    rpc SendPush(SendPushRequest) returns (SendPushResponse){};
+}
+
+message SendPushRequest {
+    map<string, string> Headings = 1;
+    map<string, string> Contents = 2;
+    repeated string IncludedSegments = 3;
+    repeated string ExcludedSegments = 4;
+    string Url = 5;
+    string WebUrl = 6;
+    map<string, string> IOSAttachments = 7;
+    string ChromeWebImage = 8;
+    string ChromeWebIcon = 9;
+}
+
+message SendPushResponse {
+    string Message = 1;
+}

@@ -1,0 +1,19 @@
+// Copyright 2021 Paingha Joe Alagoa. All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
+syntax = "proto3";
+
+option go_package = "notify";
+
+service Notify {
+    rpc SendNotification(SendNotificationRequest) returns (SendNotificationResponse){};
+}
+
+message SendNotificationRequest {
+    string Content = 1;
+}
+
+message SendNotificationResponse {
+    string Content = 1;
+}

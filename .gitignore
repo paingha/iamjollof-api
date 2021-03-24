@@ -1,0 +1,4 @@
+example.env
+/server/vendor
+/email/vendor
+/nginx

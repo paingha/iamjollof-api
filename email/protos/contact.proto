@@ -1,0 +1,28 @@
+// Copyright 2021 Paingha Joe Alagoa. All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
+syntax = "proto3";
+
+option go_package = "contact";
+
+service Contact {
+    rpc CreateContact(CreateContactRequest) returns (CreateContactResponse){};
+}
+
+message CreateContactRequest {
+    string Name = 1;
+    string Email = 2;
+    string Phone = 3;
+    string ReasonForEmail = 4;
+    string Content = 5;
+}
+
+message CreateContactResponse {
+    string Name = 1;
+    string Email = 2;
+    string Phone = 3;
+    string ReasonForEmail = 4;
+    string Content = 5;
+    string Message = 6;
+}
