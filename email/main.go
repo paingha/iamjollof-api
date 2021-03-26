@@ -43,15 +43,9 @@ func (*Server) SendEmail(ctx context.Context, r *email.SendEmailRequest) (*email
 
 func main() {
 	files := map[string]string{
-		"TemplateVerifyEmail":       "./templates/verify.html",
-		"TemplateResetEmail":        "./templates/password-reset.html",
-		"TemplateContactUs":         "./templates/contact-us.html",
-		"TemplateOrderPlaced":       "./templates/order-placed.html",
-		"TemplateOrderDelivering":   "./templates/order-delivering.html",
-		"TemplateOrderDelivered":    "./templates/order-delivered.html",
-		"TemplateOrderDelayed":      "./templates/order-delayed.html",
-		"TemplateOrderCancelled":    "./templates/order-cancelled.html",
-		"TemplateOrderUnsuccessful": "./templates/order-unsuccessful.html",
+		"TemplateVerifyEmail": "./templates/verify.html",
+		"TemplateResetEmail":  "./templates/password-reset.html",
+		"TemplateContactUs":   "./templates/contact-us.html",
 	}
 	getFilesContents(files)
 	config.LoadEnvFile()

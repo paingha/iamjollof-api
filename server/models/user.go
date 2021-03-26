@@ -39,13 +39,6 @@ type User struct {
 	DeletedAt            *time.Time `json:"deleted_at"`
 }
 
-//Message - Whatsapp message structure
-type Message struct {
-	Content string
-	To      string
-	Medium  string
-}
-
 //TableName - table name in database
 func (u *User) TableName() string {
 	return "users"
@@ -138,43 +131,6 @@ func VerifyEmailUser(token string) error {
 		return err
 	}
 	return nil
-}
-
-//SendVerifyPhoneUser - send verification code to user's phone number
-func SendVerifyPhoneUser(user *User, id int32, code string, medium string) error {
-	current := time.Now()
-	future := current.Add(time.Minute * 30) //expires after 30 minutes of being sent
-	if err := config.DB.Model(&user).Where(&User{ID: id}).Updates(map[string]interface{}{"phone_number": user.PhoneNumber, "phone_verify_sent_at": current, "phone_verify_expires_at": future, "phone_verify_code": code}).Error; err != nil {
-		return err
-	}
-	/*
-		message := Message{
-			Content: "SMS Verification Code: " + code,
-			To:      user.PhoneNumber,
-			Medium:  medium,
-		}
-		errs := stuff.SmsService.Send("sms", message) //Sends to sms message queue
-		if errs != nil {
-			return errs
-		}
-	*/
-	return nil
-}
-
-//VerifyPhoneUser - verifies the verify code and expiry time and then sets phone_verified to true
-func VerifyPhoneUser(user *User, id int32, token string) (bool, error) {
-	var dbUser User
-	current := time.Now()
-	if err := config.DB.Where("id = ?", id).First(&dbUser).Error; err != nil {
-		return false, err
-	}
-	if current.Before(dbUser.PhoneVerifyExpiresAt) && token == dbUser.PhoneVerifyCode {
-		if errs := config.DB.Model(&user).Where(&User{PhoneVerifyCode: token}).Updates(map[string]interface{}{"phone_verified": true, "phone_verify_code": ""}).Error; errs != nil {
-			return false, errs
-		}
-		return true, nil
-	}
-	return false, nil
 }
 
 //UpdateUser - update a user
